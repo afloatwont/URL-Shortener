@@ -5,6 +5,10 @@ import models, database
 import string
 import random
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 
 app = FastAPI()
