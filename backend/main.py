@@ -15,7 +15,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:50537"],
+    allow_origins=["http://localhost:8800", "*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -50,7 +50,7 @@ def shorten_url(original_url: str = Body(..., embed=True), alias: str = Body("",
     db.add(url)
     db.commit()
     db.refresh(url)
-    return {"shortened_url": f"http://localhost:8000/{alias}"}
+    return {"shortened_url": f"https://url-shortener-gt1a.onrender.com/{alias}"}
 
 @app.get("/{short_code}")
 def redirect_url(short_code: str, db: Session = Depends(database.get_db)):
