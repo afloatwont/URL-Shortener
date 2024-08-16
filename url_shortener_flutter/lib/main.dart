@@ -76,7 +76,8 @@ class _MyHomePageState extends State<MyHomePage>
 
     try {
       final response = await http.post(
-        Uri.parse('http://localhost:8000/shorten'), // Replace with your backend URL
+        Uri.parse(
+            'https://url-shortener-gt1a.onrender.com/shorten'), // Replace with your backend URL
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
@@ -109,7 +110,7 @@ class _MyHomePageState extends State<MyHomePage>
   Future<void> _launchUrl(String url) async {
     if (!await launchUrl(
       Uri.parse(url),
-      mode: LaunchMode.externalApplication,
+      mode: LaunchMode.inAppBrowserView,
     )) {
       throw Exception('Could not launch $url');
     }
@@ -259,12 +260,16 @@ class _MyHomePageState extends State<MyHomePage>
                                     onTap: () {
                                       _launchUrl(_shortenedUrl);
                                     },
-                                    child: Text(
-                                      _shortenedUrl,
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.blue[900],
-                                          decoration: TextDecoration.underline),
+                                    child: MouseRegion(
+                                      cursor: SystemMouseCursors.click,
+                                      child: Text(
+                                        _shortenedUrl,
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            color: Colors.blue[900],
+                                            decoration:
+                                                TextDecoration.underline),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -275,7 +280,8 @@ class _MyHomePageState extends State<MyHomePage>
                                         ClipboardData(text: _shortenedUrl));
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
-                                          content: Text('Link copied to clipboard')),
+                                          content:
+                                              Text('Link copied to clipboard')),
                                     );
                                   },
                                 ),
