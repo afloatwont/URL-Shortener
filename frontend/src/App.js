@@ -9,7 +9,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/shorten', {
+      const response = await axios.post('http://https://url-shortener-gt1a.onrender.com/shorten', {
         original_url: originalUrl,
         alias: alias,
       });
