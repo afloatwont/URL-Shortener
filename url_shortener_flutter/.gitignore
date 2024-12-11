@@ -43,7 +43,7 @@ app.*.map.json
 /android/app/release
 
 # Ignore build directory
+!build/web/
 build/
 
 # But not build/web
-!build/web/
