@@ -31,6 +31,30 @@
 
   <title>url_shortener_flutter</title>
   <link rel="manifest" href="manifest.json">
+
+  <!-- Preload CanvasKit -->
+  <link rel="preload" href="canvaskit/canvaskit.wasm" as="fetch" crossorigin="anonymous">
+  <link rel="preload" href="canvaskit/canvaskit.js" as="script">
+  
+  <!-- Configure CanvasKit -->
+  <script>
+    window.flutterWebRenderer = "canvaskit";
+    window.addEventListener('load', function(ev) {
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        },
+        onEntrypointLoaded: function(engineInitializer) {
+          engineInitializer.initializeEngine({
+            useColorEmoji: true,
+          }).then(function(appRunner) {
+            appRunner.runApp();
+          });
+        }
+      });
+    });
+  </script>
+  <script src="flutter.js" defer></script>
 </head>
 <body>
   <script src="flutter_bootstrap.js" async></script>
