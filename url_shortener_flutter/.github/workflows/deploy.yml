@@ -12,6 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      # Create .nojekyll to bypass Jekyll processing
+      - name: Disable Jekyll
+        run: touch build/web/.nojekyll
+
       # Set up Flutter
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -32,9 +36,6 @@ jobs:
       - name: Build web app
         run: flutter build web --web-renderer canvaskit --release --base-href "/${{ github.repository }}/"
 
-      # Create .nojekyll to bypass Jekyll processing
-      - name: Disable Jekyll
-        run: touch build/web/.nojekyll
 
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
